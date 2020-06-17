@@ -1,10 +1,9 @@
 package org.rest.webservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -18,8 +17,9 @@ public class Post {
   @Id
   @GeneratedValue
   private Integer id;
-  private Integer userId;
-  private String postTitle;
-  private String postDescription;
-  private Date postDate;
+  private String description;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JsonIgnore
+  private User user;
 }

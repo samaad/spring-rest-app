@@ -7,9 +7,11 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Setter @Getter
@@ -29,4 +31,7 @@ public class User {
   @Past
   @ApiModelProperty(notes = "Birth date should be in the past")
   private Date birthDate;
+
+  @OneToMany(mappedBy = "user")
+  private List<Post> posts;
 }

@@ -1,53 +1,50 @@
 package org.rest.webservice.dao;
 
 import org.rest.webservice.model.Post;
+import org.rest.webservice.model.User;
+import org.rest.webservice.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostDao {
-  private static List<Post> posts = new ArrayList<>();
-  private static int COUNTER = 3;
-  static {
-    posts.add(new Post(1,1,"Adam", "",new Date()));
-    posts.add(new Post(2,1,"Adam", "",new Date()));
-    posts.add(new Post(3,2,"Eve", "",new Date()));
-    posts.add(new Post(3,3,"Jack", "",new Date()));
-    posts.add(new Post(3,3,"Jack", "",new Date()));
-  }
+
+  @Autowired
+  PostRepository postsRepository;
+  @Autowired
+  UserJpaDao userJpaDao;
 
   public List<Post> findAll() {
-    return posts;
+    return postsRepository.findAll();
   }
 
-  public Post save(Post post){
-    if(post.getId() == null){
-      post.setId(++COUNTER);
+  public Post save(Post post, int userId){
+    Optional<User> users = userJpaDao.findOne(userId);
+    if(users.get() == null){
+      return null;
     }
-    posts.add(post);
+    User user = users.get();
+    post.setUser(user);
+    postsRepository.save(post);
     return post;
   }
 
   public List<Post> findByUserId(int userId) {
+    Optional<User> users = userJpaDao.findOne(userId);
     List<Post> postlist = new ArrayList<>();
-    for(Post post: posts){
-      if(post.getUserId() == userId){
-        postlist.add(post);
-      }
-    }
+    postlist = users.map(User::getPosts).orElse(postlist);
     return postlist;
   }
 
-  public Post findOne(int postid) {
-    for(Post post: posts){
-      if(post.getId() == postid){
-        return post;
-      }
-    }
-    return null;
+  public Post findOne(int useId, int postid) {
+    Optional<Post> post = postsRepository.findById(postid);
+    return post.map(Optional::of).orElse(null).get();
+
   }
 
 }
