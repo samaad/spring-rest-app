@@ -9,12 +9,12 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('LocalSonar') {
-                 sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -X'
+                    sh "mvn -B clean install sonar:sonar"
                 }
             }
         }
         stage("Quality gate") {
-            steps {
+            timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
             }
         }

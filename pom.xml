@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.rest.webservice</groupId>
-	<artifactId>rest-web-service</artifactId>
+	<artifactId>react-test-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rest-web-service</name>
+	<name>react-test-app</name>
 	<description>Demo project for Spring Boot</description>
 
     <properties>
