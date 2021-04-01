@@ -27,6 +27,7 @@
         <sonar.exclusions>
             **/*.xml
         </sonar.exclusions>
+        <sonar.java.binaries>${basedir}</sonar.java.binaries>
         <sonar.coverage.exclusions>
             **/qualitymeasurementsample/*
         </sonar.coverage.exclusions>
