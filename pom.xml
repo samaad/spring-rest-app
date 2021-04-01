@@ -20,6 +20,7 @@
         <!-- test result measurements -->
         <project.test.result.directory>${project.build.directory}/test-results</project.test.result.directory>
         <sonar.host.url>http://192.168.1.19:9000</sonar.host.url>
+        <sonar.sources>src/main/java</sonar.sources>
         <sonar.scm.provider>git</sonar.scm.provider>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
         <sonar.coverage.jacoco.xmlReportPaths>${project.test.result.directory}/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
