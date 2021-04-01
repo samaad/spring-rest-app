@@ -1,6 +1,5 @@
 package org.rest.webservice.controller;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.rest.webservice.versioning.Name;
 import org.rest.webservice.versioning.PersonV1;
 import org.rest.webservice.versioning.PersonV2;
